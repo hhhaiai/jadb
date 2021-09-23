@@ -7,6 +7,7 @@ import se.vidstige.jadb.managers.PropertyManager;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.InetSocketAddress;
 import java.util.List;
 import java.util.Map;
 
@@ -16,6 +17,14 @@ public class JAdb {
 
     public static List<JadbDevice> getDevices() throws IOException, JadbException {
         return jadb.getDevices();
+    }
+
+    public static InetSocketAddress connect(String ip, int port) throws ConnectionToRemoteDeviceException, IOException, JadbException {
+        return jadb.connectToTcpDevice(new InetSocketAddress(ip, port));
+    }
+
+    public static InetSocketAddress disconnect(String ip, int port) throws ConnectionToRemoteDeviceException, IOException, JadbException {
+        return jadb.disconnectFromTcpDevice(new InetSocketAddress(ip, port));
     }
 
     public static void install(JadbDevice device, File localFile) throws IOException, JadbException {
@@ -43,7 +52,7 @@ public class JAdb {
     }
 
     public static InputStream executeShell(JadbDevice device, String command, String... args) throws IOException, JadbException {
-      return   device.executeShell(command, args);
+        return device.executeShell(command, args);
     }
 
     public static void tcpip(JadbDevice device) throws IOException, JadbException {

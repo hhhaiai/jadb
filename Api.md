@@ -2,6 +2,24 @@
 
 > 确保`adb server`是运行的，可以执行命令行命令`adb devices`
 
+### 连接
+
+* adb connect
+
+``` java
+JAdb.connect(String ip, int port)
+// or
+new JadbConnection().connectToTcpDevice(InetSocketAddress inetSocketAddress)
+```
+
+* adb disconnect
+
+``` java
+JAdb.disconnect(String ip, int port)
+// or
+new JadbConnection().disconnectFromTcpDevice(InetSocketAddress tcpAddressEntity)
+```
+
 ### 获取设备列表
 
 ``` java
