@@ -53,7 +53,17 @@ project name and tag ignoring actual values from pom.xml. So you need to write:
     <version>v1.2.1</version>
 </dependency>
 ```
+## Build
 
+``` shell
+#!/bin/sh
+set -eu
+
+docker run -it --rm               \
+    -v "$(pwd)":/opt/maven        \
+    -w /opt/maven maven:3.5-jdk-7 \
+     mvn clean install
+```
 ## Troubleshooting
 If you cannot connect to your device check the following.
 

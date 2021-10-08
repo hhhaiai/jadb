@@ -1,5 +1,6 @@
-package se.vidstige.jadb;
+package se.vidstige.jadb.api;
 
+import se.vidstige.jadb.*;
 import se.vidstige.jadb.managers.Package;
 import se.vidstige.jadb.managers.PackageManager;
 import se.vidstige.jadb.managers.PropertyManager;
@@ -11,20 +12,27 @@ import java.net.InetSocketAddress;
 import java.util.List;
 import java.util.Map;
 
-public class JAdb {
+/**
+ * @Copyright © 2021 sanbo Inc. All rights reserved.
+ * @Description: wrapping adb commond
+ * @Version: 1.0
+ * @Create: 2021/10/08 11:28:42
+ * @author: sanbo
+ */
+public class Jdb {
 
-    private static JadbConnection jadb = new JadbConnection();
+    private static JadbConnection conn = new JadbConnection();
 
     public static List<JadbDevice> getDevices() throws IOException, JadbException {
-        return jadb.getDevices();
+        return conn.getDevices();
     }
 
     public static InetSocketAddress connect(String ip, int port) throws ConnectionToRemoteDeviceException, IOException, JadbException {
-        return jadb.connectToTcpDevice(new InetSocketAddress(ip, port));
+        return conn.connectToTcpDevice(new InetSocketAddress(ip, port));
     }
 
     public static InetSocketAddress disconnect(String ip, int port) throws ConnectionToRemoteDeviceException, IOException, JadbException {
-        return jadb.disconnectFromTcpDevice(new InetSocketAddress(ip, port));
+        return conn.disconnectFromTcpDevice(new InetSocketAddress(ip, port));
     }
 
     public static void install(JadbDevice device, File localFile) throws IOException, JadbException {

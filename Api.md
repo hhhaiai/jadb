@@ -1,13 +1,17 @@
 # API用法
 
 > 确保`adb server`是运行的，可以执行命令行命令`adb devices`
+>
+> 确定几个事:
+> * 标准ADB命令(adb 命令)在Jdb
+> * 获取详情命令(获取IP、获取分辨率等)在Jwarp
 
 ### 连接
 
 * adb connect
 
 ``` java
-JAdb.connect(String ip, int port)
+Jdb.connect(String ip, int port)
 // or
 new JadbConnection().connectToTcpDevice(InetSocketAddress inetSocketAddress)
 ```
@@ -15,7 +19,7 @@ new JadbConnection().connectToTcpDevice(InetSocketAddress inetSocketAddress)
 * adb disconnect
 
 ``` java
-JAdb.disconnect(String ip, int port)
+Jdb.disconnect(String ip, int port)
 // or
 new JadbConnection().disconnectFromTcpDevice(InetSocketAddress tcpAddressEntity)
 ```
@@ -24,10 +28,10 @@ new JadbConnection().disconnectFromTcpDevice(InetSocketAddress tcpAddressEntity)
 
 ``` java
 // 方式一
-JadbConnection jadb = new JadbConnection()
-List<JadbDevice> devices = jadb.getDevices()
+JadbConnection Jdb = new JadbConnection()
+List<JadbDevice> devices = Jdb.getDevices()
 // 方式二
-List<JadbDevice> devices=JAdb.getDevices()
+List<JadbDevice> devices=Jdb.getDevices()
 ```
 
 ### 安装列表
@@ -36,7 +40,7 @@ List<JadbDevice> devices=JAdb.getDevices()
 
 ``` java
 // 方式一
-JAdb.install(JadbDevice device, File localFile)
+Jdb.install(JadbDevice device, File localFile)
 //方式二
 new PackageManager(device).install(localFile)
 ```
@@ -45,7 +49,7 @@ new PackageManager(device).install(localFile)
 
 ``` java
 // 方式一
-JAdb.uninstall(JadbDevice device, String pkgName)
+Jdb.uninstall(JadbDevice device, String pkgName)
 //方式二
  new PackageManager(device).uninstall(new Package(pkgName))
 ```
@@ -54,7 +58,7 @@ JAdb.uninstall(JadbDevice device, String pkgName)
 
 ``` java
 // 方式一
-JAdb.launch(JadbDevice device, String pkgName)
+Jdb.launch(JadbDevice device, String pkgName)
 //方式二
 new PackageManager(device).launch(new Package(pkgName))
 ```
@@ -63,7 +67,7 @@ new PackageManager(device).launch(new Package(pkgName))
 
 ``` java
 // 方式一
-List<Package> pkgs = JAdb.getPackages(JadbDevice device)
+List<Package> pkgs = Jdb.getPackages(JadbDevice device)
 //方式二
 new PackageManager(device).getPackages()
 ```
@@ -74,7 +78,7 @@ new PackageManager(device).getPackages()
 
 ``` java
 // 方式一
-JAdb.tcpip(JadbDevice device) 
+Jdb.tcpip(JadbDevice device) 
 // 方式二
 JadbDevice().enableAdbOverTCP()
 // 方式三
@@ -85,7 +89,7 @@ JadbDevice().tcpip()
 
 ``` java
 // 方式一
-JAdb.push(JadbDevice device, File localFile, String remotePath)
+Jdb.push(JadbDevice device, File localFile, String remotePath)
 // 方式二
 JadbDevice().push(File local, RemoteFile remote)
 ```
@@ -94,7 +98,7 @@ JadbDevice().push(File local, RemoteFile remote)
 
 ``` java
 // 方式一
-JAdb.pull(JadbDevice device, String remotePath, File localFile)
+Jdb.pull(JadbDevice device, String remotePath, File localFile)
 // 方式二
 JadbDevice().pull(RemoteFile remote, File local)
 ```
@@ -103,7 +107,7 @@ JadbDevice().pull(RemoteFile remote, File local)
 
 ``` java
 // 方式一
-InputStream is = JAdb.executeShell(JadbDevice device, String command, String... args)
+InputStream is = Jdb.executeShell(JadbDevice device, String command, String... args)
 // 方式二
 InputStream is = JadbDevice().executeShell(String command, String... args)
 ```
