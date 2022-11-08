@@ -71,6 +71,12 @@ public class JadbDevice {
         }
     }
 
+    /**
+     * 发信息对象: 随意-->host:transport-any  、 特定的-->host:transport:${serial}
+     * @return
+     * @throws IOException
+     * @throws JadbException
+     */
     private Transport getTransport() throws IOException, JadbException {
         Transport transport = transportFactory.createTransport();
         // Do not use try-with-resources here. We want to return unclosed Transport and it is up to caller

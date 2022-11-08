@@ -4,44 +4,24 @@ I. 概览:
 
 Android ADB使用于:
 
-- keep track of all Android devices and emulators instances
-  connected to or running on a given host developer machine
+- 跟踪连接到给定主机开发者机器或在其上运行的所有 Android 设备和模拟器实例
 
-- implement various control commands (e.g. "adb shell", "adb pull", etc.)
-  for the benefit of clients (command-line users, or helper programs like
-  DDMS). These commands are called 'services' in ADB.
+- 为客户端（命令行用户或 DDMS 等辅助程序）的利益实施各种控制命令（例如“adb shell”、“adb pull”等）。 这些命令在 ADB 中称为“服务”。
 
-As a whole, everything works through the following components:
+总的来说，一切都通过以下组件进行：
 
   1. The ADB server
 
-    This is a background process that runs on the host machine. Its purpose
-    is to sense the USB ports to know when devices are attached/removed,
-    as well as when emulator instances start/stop.
-
-    It thus maintains a list of "connected devices" and assigns a 'state'
-    to each one of them: OFFLINE, BOOTLOADER, RECOVERY or ONLINE (more on
-    this below).
-
-    The ADB server is really one giant multiplexing loop whose purpose is
-    to orchestrate the exchange of data (packets, really) between clients,
-    services and devices.
+    这是在主机上运行的后台进程。 其目的是感应 USB 端口以了解设备何时连接/移除，以及模拟器实例何时启动/停止。
+    因此，它维护一个“已连接设备”列表，并为每个设备分配一个“状态”：离线(OFFLINE)、引导加载器(BOOTLOADER)、恢复(RECOVERY)或在线(ONLINE)（更多内容见下文）。
+    ADB 服务器实际上是一个巨大的多路复用循环，其目的是协调客户端、服务和设备之间的数据交换（实际上是数据包）。
 
 
   2. The ADB daemon (adbd)
 
-    The 'adbd' program runs as a background process within an Android device
-    or emulated system. Its purpose is to connect to the ADB server
-    (through USB for devices, through TCP for emulators) and provide a
-    few services for clients that run on the host.
-
-    The ADB server considers that a device is ONLINE when it has successfully
-    connected to the adbd program within it. Otherwise, the device is OFFLINE,
-    meaning that the ADB server detected a new device/emulator, but could not
-    connect to the adbd daemon.
-
-    The BOOTLOADER and RECOVERY states correspond to alternate states of
-    devices when they are in the bootloader or recovery mode.
+    “adbd”程序在 Android 设备或模拟系统中作为后台进程运行。 它的目的是连接到 ADB 服务器（通过 USB 连接设备，通过 TCP 连接模拟器）并为运行在主机上的客户端提供一些服务。
+    当 ADB 服务器成功连接到其中的 adbd 程序时，ADB 服务器认为该设备处于在线状态。 否则，设备处于离线状态，这意味着 ADB 服务器检测到新设备/模拟器，但无法连接到 adbd 守护程序。
+    引导加载器(BOOTLOADER)和恢复(RECOVERY) 状态对应于设备处于引导加载程序或恢复模式时的备用状态。
 
   3. The ADB command-line client
 

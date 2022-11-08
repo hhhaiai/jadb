@@ -1,4 +1,6 @@
 # JADB #
+
+本地adb开启服务AdbServerLauncher， java调用本地adb服务(tcpip)
 ADB client implemented in pure Java.
 
 The Android Debug Bridge (ADB) is a client-server architecture used to communicate with Android devices (install APKs, debug apps, etc).

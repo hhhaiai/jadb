@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.Map;
 
 /**
- * Launches the ADB server
+ * Launches the ADB server.通过本地adb开启本地的服务端。暂无用到
  */
 public class AdbServerLauncher {
     private final String executable;
@@ -12,7 +12,7 @@ public class AdbServerLauncher {
 
     /**
      * Creates a new launcher loading ADB from the environment.
-     * 
+     *
      * @param subprocess the sub-process.
      * @param environment the environment to use to locate the ADB executable.
      */
@@ -31,6 +31,11 @@ public class AdbServerLauncher {
         this.executable = executable;
     }
 
+    /**
+     * 使用本地的adb 服务
+     * @param environment
+     * @return
+     */
     private static String findAdbExecutable(Map<String, String> environment) {
         String androidHome = environment.get("ANDROID_HOME");
         if (androidHome == null || androidHome.equals("")) {
